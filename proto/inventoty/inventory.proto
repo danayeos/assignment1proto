@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package inventory;
+
+option go_package = "github.com/Prrost/assignment1proto/proto/inventory";
+
+service InventoryService{
+  rpc CreateProduct (CreateRequest) returns (CreateResponse);
+  rpc GetProductById (GetByIdRequest) returns (GetByIdResponse);
+  rpc GetAllProducts (GetAllRequest) returns (GetAllResponse);
+  rpc UpdateProduct (UpdateRequest) returns (UpdateResponse);
+  rpc DeleteProduct (DeleteRequest) returns (DeleteResponse);
+}
+
+message Product {
+  int64 id = 1;
+  string name = 2;
+  int64 amount = 3;
+  bool available = 4;
+}
+
+message CreateRequest{
+  string name = 1;
+  int64 amount = 2;
+}
+
+message CreateResponse{
+  Product product = 1;
+  string message = 2;
+}
+
+message GetByIdRequest{
+  int64 id = 1;
+}
+
+message GetByIdResponse{
+  Product product = 1;
+  string message = 2;
+}
+
+message GetAllRequest{
+  string name = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message GetAllResponse{
+  repeated Product products = 1;
+  string message = 2;
+}
+
+message UpdateRequest{
+  int64 id = 1;
+  string name = 2;
+  int64 amount = 3;
+}
+
+message UpdateResponse{
+  Product product = 1;
+  string message = 2;
+}
+
+message DeleteRequest{
+  int64 id = 1;
+}
+
+message DeleteResponse{
+  Product product = 1;
+  string message = 2;
+}
